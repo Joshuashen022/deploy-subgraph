@@ -3,12 +3,9 @@ import * as path from "path";
 import { execSync } from "child_process";
 import { ethers } from "ethers";
 import "dotenv/config";
-import { promisify } from "util";
-
-const readFile = promisify(fs.readFile);
 
 const abiPath = process.env.ABI_PATH as string;
-const addressPath = process.env.ADDRESS_PATH as string;
+const contractAddress = process.env.CONTRACT_ADDRESS as string;
 const subgraphRPCProvider = process.env.SUBGRAPH_RPC_PROVIDER as string;
 const subgraphIP: string = process.env.SUBGRAPH_SERVICE_IP as string;
 const projectName: string = process.env.SUBGRAPH_PROJECT_NAME as string;
@@ -18,7 +15,6 @@ const subgraphNetwork: string = process.env.SUBGRAPH_NETWORK as string;
 let blockNumber: number = process.env.SUBGRAPH_START_BLOCK_NUMBER as unknown as number;
 let networksFilePath: string;
 let subgraphFilePath: string;
-let contractAddress: string;
 
 // Function to get the address and block number
 async function initialize() {
@@ -36,9 +32,8 @@ async function initialize() {
     blockNumber = await provider.getBlockNumber();
   }
 
-  contractAddress = JSON.parse(await readFile(addressPath, "utf8"))[abiPath] as string;
-  networksFilePath = path.join(__dirname, `../subgraph/${projectName}/networks.json`);
-  subgraphFilePath = path.join(__dirname, `../subgraph/${projectName}/subgraph.yaml`);
+  networksFilePath = path.join(__dirname, `./subgraph/${projectName}/networks.json`);
+  subgraphFilePath = path.join(__dirname, `./subgraph/${projectName}/subgraph.yaml`);
 
   console.log("projectName", projectName);
   console.log("contractAddress", contractAddress);
@@ -46,7 +41,7 @@ async function initialize() {
   console.log("networksFilePath", networksFilePath);
   console.log("subgraphFilePath", subgraphFilePath);
 
-  const projectPath = path.join(__dirname, `../subgraph/${projectName}`);
+  const projectPath = path.join(__dirname, `./subgraph/${projectName}`);
   if (fs.existsSync(projectPath)) {
     console.log(`Directory ${projectPath} exist.`);
     fs.rmSync(projectPath, { recursive: true, force: true });
