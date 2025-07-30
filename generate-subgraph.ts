@@ -74,9 +74,9 @@ function updateNetworksJson(address: string, blockNumber: number) {
 
   // Add a new network entry
   networksData[subgraphNetwork] = {
-    AssetMetadata: {
+    [projectName]: {
       address: address,
-      startBlock: blockNumber,
+      startBlock: Number(blockNumber),
     },
   };
 
