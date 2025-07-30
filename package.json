@@ -1,0 +1,33 @@
+{
+  "name": "deploy-subgraph",
+  "version": "1.0.0",
+  "description": "Script to generate and deploy subgraphs",
+  "main": "generate-subgraph.ts",
+  "scripts": {
+    "start": "ts-node generate-subgraph.ts",
+    "build": "tsc",
+    "dev": "ts-node --watch generate-subgraph.ts"
+  },
+  "keywords": [
+    "subgraph",
+    "ethereum",
+    "graph",
+    "deployment"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "ethers": "^6.8.1",
+    "dotenv": "^16.3.1",
+    "@graphprotocol/client-cli": "^3.0.7",
+    "@graphprotocol/graph-cli": "^0.97.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.0",
+    "typescript": "^5.2.2",
+    "ts-node": "^10.9.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+} 
